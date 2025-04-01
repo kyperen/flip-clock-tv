@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Clock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/flipclock.css">
+    <style>
+        /* Inline QR kod stilleri - daha sola çekilmiş ve daha da büyütülmüş */
+        .trendyol-qr-inline {
+            position: absolute;
+            top: 50%;
+            left: -200px; /* -150px'ten daha sola çekildi */
+            transform: translateY(-50%); /* Dikey olarak ortalama */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 200;
+        }
+        .qr-code-inline {
+            width: 130px; /* 100px'ten 130px'e büyütüldü */
+            height: 130px; /* 100px'ten 130px'e büyütüldü */
+            background-color: white;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .qr-code-inline:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Logo container'ı için göreceli konumlandırma */
+        .logo-container {
+            position: relative; /* Bu zaten var, ama emin olmak için */
+        }
+    </style>
+</head>
+<body>
+    <div class="page-loader">
+        <div class="loader"></div>
+    </div>
+    <div class="stars"></div>
+    <div class="header">
+        <div class="logo-container">
+            <!-- Logonun soluna yerleştirilmiş QR kod - etiket kaldırıldı -->
+            <div class="trendyol-qr-inline">
+                <a href="https://www.trendyol.com/magaza/spornoktasi-m-569301?sst=0" target="_blank">
+                    <img src="qr-trendyol.png" alt="Mağazamızı Ziyaret Edin" class="qr-code-inline">
+                </a>
+                <!-- Etiket kaldırıldı -->
+            </div>
+            
+            <img src="logo.png" alt="Marka Logosu" class="brand-logo">
+        </div>
+        <div class="weather-widget">
+            <div class="weather-icon">🌤️</div>
+            <div class="weather-info">
+                <span class="temperature">23°C</span>
+                <span class="location">İstanbul</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flip-clock-container -->
+    <div class="flip-clock-container">
+        <div class="clock-container"></div>
+        <!-- Saniye bloğunun hemen üstüne tarih eklendi -->
+        <div class="simple-date">24/03/2025</div>
+    </div>
+
+    <div class="brand-logos-container">
+        <div class="marquee-wrapper">
+            <!-- Tek set logolar - JS ile çoğaltılacak -->
+            <img src="logo1.png" alt="Logo 1">
+            <img src="logo2.png" alt="Logo 2">
+            <img src="logo3.png" alt="Logo 3">
+            <img src="logo4.png" alt="Logo 4">
+            <img src="logo5.png" alt="Logo 5">
+            <img src="logo6.png" alt="Logo 6">
+            <img src="logo7.png" alt="Logo 7">
+        </div>
+    </div>
+
+    <!-- Özel gün bildirimleri için alan -->
+    <div class="special-day-notification" id="specialDayNotification"></div>
+
+    <!-- Tema değişim bildirimi -->
+    <div class="theme-notification"></div>
+    
+    <!-- Kayan yazı için şerit -->
+    <div class="scrolling-text-container">
+        <div class="scrolling-text-wrapper">
+            <div class="scrolling-text">
+                <!-- İlk set -->
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">👟</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">👞</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🥾</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">⚽</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🏀</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🏐</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">👕</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🧦</span>
+                
+                <!-- İkinci set (aynı içerik) - sonsuz döngü için -->
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">👟</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">👞</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🥾</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">⚽</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🏀</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🏐</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">👕</span>
+                <span class="text">AÇILIŞA ÖZEL İNDİRİM!</span>
+                <span class="emoji">🧦</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/flipclock.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
